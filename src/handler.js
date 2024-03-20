@@ -1,6 +1,9 @@
 const { nanoid } = require('nanoid');
 const books = require('./books');
 
+const isEmpty = (temp) => !temp && temp !== '';
+const isUnfinished = (pass, total) => pass > total;
+
 const addBookHandler = (request, h) => {
   const {
     name,
@@ -32,9 +35,6 @@ const addBookHandler = (request, h) => {
     insertedAt,
     updatedAt,
   };
-
-  const isEmpty = (temp) => !temp && temp !== '';
-  const isUnfinished = (pass, total) => pass > total;
 
   if (isEmpty(name)) {
     const response = h.response({
@@ -146,9 +146,6 @@ const editBookByIdHandler = (request, h) => {
 
   const finished = pageCount === readPage;
   const updatedAt = new Date().toISOString();
-
-  const isEmpty = (temp) => !temp && temp !== '';
-  const isUnfinished = (pass, total) => pass > total;
 
   if (isEmpty(name)) {
     const response = h.response({
